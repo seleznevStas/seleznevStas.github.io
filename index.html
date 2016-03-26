@@ -47,7 +47,7 @@
 
     function showPhrases(phrases) {
         var text = "";
-        for (var i = 0; i < phrases.length; i++) {
+        for (var i = phrases.length; i >= 0; i--) {
             if (phrases[i].text.trim() === "") continue;
             var duration = phrases[i].timeStamp - phrases[0].timeStamp;
             text += msToTime(duration) + ": " + capitalize(phrases[i].text) + "<br />";
