@@ -51,7 +51,7 @@
             if (phrases[i].text === "") continue;
             var phrase = capitalize(phrases[i].text);
             phrase = addSentenceSymbol(phrase);
-            text += new Date(phrase[i].timeStamp).toLocaleTimeString() + ": " + phrase + "<br />";
+            text += (new Date(phrases[i].timeStamp)).toLocaleTimeString() + ": " + phrase + "<br />";
         }
         document.getElementById("text").innerHTML = text;
     }
