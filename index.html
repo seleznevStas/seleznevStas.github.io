@@ -18,7 +18,8 @@
     recognition.onspeechstart = function () {
         phrases.push({
             text: "",
-            timeStamp: Date.now()
+            timeStamp: Date.now(),
+            isFinal: false
         });
     };
 
@@ -26,6 +27,7 @@
         var phrase = e.results[0];
         var lastIndex = phrases.length - 1;
         phrases[lastIndex].text = phrase[0].transcript.trim();
+        phrases[lastIndex].isFinal = e.final;
         showPhrases(phrases);
     };
 
@@ -50,7 +52,9 @@
         for (var i = phrases.length - 1; i >= 0; i--) {
             if (phrases[i].text === "") continue;
             var phrase = capitalize(phrases[i].text);
-            phrase = addSentenceSymbol(phrase);
+            if (phrases[i].isFinal) {
+                phrase = addSentenceSymbol(phrase);
+            }
             text += (new Date(phrases[i].timeStamp)).toLocaleTimeString() + ": " + phrase + "<br />";
         }
         document.getElementById("text").innerHTML = text;
