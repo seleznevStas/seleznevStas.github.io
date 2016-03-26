@@ -24,11 +24,10 @@
     };
 
     recognition.onresult = function (e) {
-        console.log(e);
         var phrase = e.results[0];
         var lastIndex = phrases.length - 1;
         phrases[lastIndex].text = phrase[0].transcript.trim();
-        phrases[lastIndex].isFinal = phrase.final;
+        phrases[lastIndex].isFinal = phrase.isFinal;
         showPhrases(phrases);
     };
 
