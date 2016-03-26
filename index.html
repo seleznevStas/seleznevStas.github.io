@@ -27,7 +27,7 @@
         var phrase = e.results[0];
         var lastIndex = phrases.length - 1;
         phrases[lastIndex].text = phrase[0].transcript.trim();
-        phrases[lastIndex].isFinal = e.final;
+        phrases[lastIndex].isFinal = e.results.final;
         showPhrases(phrases);
     };
 
