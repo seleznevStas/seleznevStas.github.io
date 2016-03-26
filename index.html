@@ -25,7 +25,7 @@
     recognition.onresult = function (e) {
         var phrase = e.results[0];
         var lastIndex = phrases.length - 1;
-        phrases[lastIndex].text = phrase[0].transcript;
+        phrases[lastIndex].text = phrase[0].transcript.trim();
         showPhrases(phrases);
     };
 
@@ -48,9 +48,11 @@
     function showPhrases(phrases) {
         var text = "";
         for (var i = phrases.length - 1; i >= 0; i--) {
-            if (phrases[i].text.trim() === "") continue;
+            if (phrases[i].text === "") continue;
             var duration = phrases[i].timeStamp - phrases[0].timeStamp;
-            text += msToTime(duration) + ": " + capitalize(phrases[i].text) + "<br />";
+            var phrase = capitalize(phrases[i].text);
+            phrase = addSentenceSymbol(phrase);
+            text += msToTime(duration) + ": " + phrase + "<br />";
         }
         document.getElementById("text").innerHTML = text;
     }
@@ -69,6 +71,67 @@
 
     function capitalize(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function addSentenceSymbol(sentence) {
+        var lastSymbol = sentence[sentence.length - 1];
+        if (lastSymbol === "." || lastSymbol === "!" || lastSymbol === "?") {
+            return sentence;
+        }
+        if (isQuestionSentence(sentence)) {
+            return sentence + "?";
+        } else {
+            return sentence + ".";
+        }
+    }
+
+    function isQuestionSentence(sentence) {
+        var affixes = ["Could",
+            "Couldn’t",
+            "Shall",
+            "Should",
+            "Shouldn’t",
+            "Would",
+            "Wouldn’t",
+            "Will",
+            "Won’t",
+            "Do",
+            "Did",
+            "Didn’t",
+            "Does",
+            "Doesn’t",
+            "Is",
+            "Isn’t",
+            "Are",
+            "Aren’t",
+            "Can",
+            "Can’t",
+            "Was",
+            "Wasn’t",
+            "Were",
+            "Weren’t",
+            "Has",
+            "Hasn’t",
+            "Have",
+            "Haven’t",
+            "Had",
+            "Hadn’t",
+            "Who",
+            "What",
+            "When",
+            "Where",
+            "How",
+            "Why",
+            "Which",
+            "Might"];
+
+        for (var i = 0; i < affixes.length; i++) {
+            if (sentence.indexOf(affixes[i]) === 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 </script>
 </body>
