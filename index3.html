@@ -117,24 +117,9 @@
             "Which",
             "Might"];
 
-        var blankAffixes = ["Or"];
-
-        var words = sentence.split(/\s+/);
-        var word0 = words.length > 0 ? words[0].trim().toUpperCase() : "";
-        var word1 = words.length > 1 ? words[1].trim().toUpperCase() : "";
-
         for (var i = 0; i < affixes.length; i++) {
-            var affix = affixes[i].toUpperCase();
-            if (word0 === affix) {
+            if (sentence.indexOf(affixes[i]) === 0) {
                 return true;
-            }
-            if (word1 === affix) {
-                for (var j = 0; j < blankAffixes.length; j++) {
-                    var blankAffix = blankAffixes[j].toUpperCase();
-                    if (word0 === blankAffix) {
-                        return true;
-                    }
-                }
             }
         }
 
