@@ -117,8 +117,13 @@
             "Which",
             "Might"];
 
+        var words = sentence.split(/\s+/);
+        var word0 = words.length > 0 ? words[0].trim().toUpperCase() : "";
+        var word1 = words.length > 1 ? words[1].trim().toUpperCase() : "";
+
         for (var i = 0; i < affixes.length; i++) {
-            if (sentence.indexOf(affixes[i]) === 0) {
+            var affix = affixes[i].toUpperCase();
+            if (word0 === affix || word1 === affix) {
                 return true;
             }
         }
