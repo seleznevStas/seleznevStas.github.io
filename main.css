@@ -1,0 +1,828 @@
+@font-face {
+    font-family: HelveticaCECO;
+    src: url(data/helveticace-condobl.ttf);
+}
+
+html {
+    cursor: url(images/cursor-default.png), auto;
+    font-family: HelveticaCECO, sans-serif;
+    font-size: 16px;
+    overflow: hidden;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.toolbar {
+    padding: 6px 12px;
+    color: #fff;
+    background-color: #000;
+    z-index: 3000;
+    position: relative;
+}
+
+.menu {
+    float: left;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.menu__item {
+    font-weight: 700;
+    font-style: italic;
+    display: inline-block;
+    margin-right: 15px;
+    text-transform: uppercase;
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.menu__item-disabled {
+    color: #4b4b4b;
+    cursor: url(images/cursor-default.png), auto;
+}
+
+.clock {
+    width: 600px;
+    margin: 0 auto;
+    font-style: italic;
+    text-align: center;
+}
+
+.popup-clock {
+    display: none;
+    position: absolute;
+    background: url(images/popup-clock.png) no-repeat;
+    width: 200px;
+    height: 89px;
+    top: 20px;
+    left: calc(50% - 100px);
+}
+
+.clock:hover + .popup-clock {
+    display: block;
+}
+
+.notification {
+    font-style: italic;
+    float: right;
+    text-transform: uppercase;
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.notification__help {
+    position: fixed;
+    top: 35px;
+    right: 80px;
+    background-color: #000000;
+    color: #ffffff;
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 3px 5px;
+    z-index: 3000;
+}
+
+.notification__help-hidden {
+    display: none;
+}
+
+.desktop {
+    font-size: 0;
+}
+
+.desktopIcon-bin {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 3000;
+}
+
+.desktopIcon__help-bin {
+    top: -55px;
+    left: 65px;
+}
+
+.desktopIcon-save {
+    position: fixed;
+    bottom: 10px;
+    right: 90px;
+    z-index: 3000;
+}
+
+.desktopIcon__help-save {
+    top: -55px;
+    left: 60px;
+}
+
+.desktopIcon__image {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    cursor: url(images/cursor-pointer.png), auto;
+    z-index: 3000;
+    position: relative;
+}
+
+.desktopIcon__image-folder {
+    background-image: url(images/icon-folder.png);
+}
+
+.desktopIcon__image-chrome {
+    background-image: url(images/icon-chrome.png);
+}
+
+.desktopIcon__image-video {
+    background-image: url(images/icon-video.png);
+}
+
+.desktopIcon__image-help {
+    background-image: url(images/icon-help.png);
+}
+
+.desktopIcon__image-bin {
+    background-image: url(images/icon-bin.png);
+}
+
+.desktopIcon__image-save {
+    background-image: url(images/icon-save.png);
+}
+
+.desktopIcon__help {
+    font-size: 16px;
+    background-color: #000000;
+    color: #ffffff;
+    display: inline-block;
+    vertical-align: bottom;
+    text-transform: uppercase;
+    margin: 28px 0;
+    padding: 3px 5px;
+    z-index: 3000;
+    position: relative;
+}
+
+.desktopIcon__help-hidden {
+    display: none;
+}
+
+.dock {
+    position: fixed;
+    bottom: -60px;
+    left: 50%;
+    width: 480px;
+    margin-left: -240px;
+    font-size: 0;
+    z-index: 3000;
+}
+
+.dock:after {
+    position: relative;
+    top: -40px;
+    display: block;
+    box-sizing: border-box;
+    width: 480px;
+    height: 40px;
+    content: '';
+    border: 4px solid #000;
+    z-index: -1;
+}
+
+.dockIcon {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.dockIcon__image {
+    width: 60px;
+    height: 70px;
+    cursor: url(images/cursor-pointer.png), auto;
+    background-position-y: bottom !important;
+}
+
+.dockIcon__image:hover {
+    background-position-y: top !important;
+}
+
+.dockIcon__image-pill {
+    background: url(images/icon-pill.png) no-repeat;
+}
+
+.dockIcon__image-dollar {
+    background: url(images/icon-dollar.png) no-repeat;
+}
+
+.dockIcon__image-emoji {
+    background: url(images/icon-emoji.png) no-repeat;
+}
+
+.dockIcon__image-messenger {
+    background: url(images/icon-messenger.png) no-repeat;
+}
+
+.dockIcon__image-email {
+    background: url(images/icon-email.png) no-repeat;
+}
+
+.dockIcon__image-terminal {
+    background: url(images/icon-terminal.png) no-repeat;
+}
+
+.dockIcon__help {
+    font-size: 16px;
+    background-color: #000000;
+    color: #ffffff;
+    padding: 3px 5px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.dockIcon__help-hidden {
+    display: none;
+}
+
+.dockIcon__popup {
+    position: absolute;
+    display: none;
+}
+
+.dockIcon__image:hover + .dockIcon__popup {
+    display: block;
+}
+
+.dockIcon__popup-pill {
+    background: url(images/popup-pill.png) no-repeat;
+    width: 200px;
+    height: 128px;
+    top: -128px;
+    left: -60px;
+}
+
+.dockIcon__popup-dollar {
+    background: url(images/popup-dollar.png) no-repeat;
+    width: 200px;
+    height: 84px;
+    top: -84px;
+    left: 26px;
+}
+
+.dockIcon__popup-emoji {
+    background: url(images/popup-emoji.png) no-repeat;
+    width: 200px;
+    height: 103px;
+    top: -103px;
+    left: 103px;
+}
+
+.window {
+    position: absolute;
+}
+
+.window-hidden {
+    display: none;
+}
+
+.window__dragBlock {
+    position: absolute;
+    z-index: 2;
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.window__closeButton {
+    position: absolute;
+    z-index: 3;
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.window__content {
+    position: absolute;
+    z-index: 1;
+}
+
+.window-start {
+    top: calc(50% - 150px);
+    left: calc(50% - 200px);
+}
+
+.window__dragBlock-start {
+    width: calc(400px * 0.9775);
+    height: calc(400px * 0.09);
+    top: calc(400px * 0.01);
+    left: calc(400px * 0.0125);
+}
+
+.window__closeButton-start {
+    width: calc(400px * 0.215);
+    height: calc(400px * 0.085);
+    top: calc(400px * 0.5575);
+    left: calc(400px * 0.3875);
+}
+
+.startImage {
+    width: 400px;
+}
+
+.window-needHelp {
+    width: 150px;
+    height: 247px;
+    top: 300px;
+    left: 100px;
+}
+
+.window__dragBlock-needHelp {
+    width: 150px;
+    height: 247px;
+    top: 0;
+    left: 0;
+}
+
+.window__closeButton-needHelp {
+    width: 26px;
+    height: 26px;
+    top: 0;
+    left: 0;
+    font-size: 26px;
+}
+
+.window-about {
+    background: url(images/about-background.png) no-repeat;
+    width: 550px;
+    height: calc(550px * 0.6454);
+    top: calc(50% - 175px);
+    left: calc(50% - 275px);
+}
+
+.window__closeButton-about {
+    width: calc(550px * 0.0363);
+    height: calc(550px * 0.04);
+    top: calc(550px * 0.0454);
+    left: calc(550px * 0.9418);
+}
+
+.window-poem {
+    background: url(images/poem-background.png) no-repeat;
+    width: 400px;
+    height: calc(400px * 1.285);
+    top: 50px;
+    right: 50px;
+}
+
+.window__dragBlock-poem {
+    width: calc(400px * 0.975);
+    height: calc(400px * 0.0925);
+    top: calc(400px * 0.0125);
+    left: calc(400px * 0.0125);
+}
+
+.window__closeButton-poem {
+    width: calc(400px * 0.0625);
+    height: calc(400px * 0.0625);
+    top: calc(400px * 0.025);
+    left: calc(400px * 0.9);
+}
+
+.window__content-poem {
+    width: calc(400px * 0.9133);
+    height: calc(400px * 1.1266);
+    left: calc(400px * 0.0433);
+    top: calc(400px * 0.1166);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.poemText {
+    background: url(images/poem-text.png) no-repeat;
+    width: 365px;
+    height: 768px;
+}
+
+.window-folder {
+    background: url(images/folder-background.png) no-repeat;
+    width: 400px;
+    height: 514px;
+    top: 50px;
+    left: 90px;
+}
+
+.imageThumb {
+    width: 150px;
+    height: 100px;
+    display: inline-block;
+    margin: 6px 11px;
+    border: 1px solid black;
+}
+
+.imageThumb img {
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+#fullImage {
+    position: absolute;
+    z-index: 5000;
+}
+
+.window__dragBlock-folder {
+    width: calc(400px * 0.975);
+    height: calc(400px * 0.0925);
+    top: calc(400px * 0.0125);
+    left: calc(400px * 0.0125);
+}
+
+.window__closeButton-folder {
+    width: calc(400px * 0.0625);
+    height: calc(400px * 0.0625);
+    top: calc(400px * 0.025);
+    left: calc(400px * 0.9);
+}
+
+.window__content-folder {
+    width: calc(400px * 0.9133);
+    height: calc(400px * 1.1266);
+    left: calc(400px * 0.0433);
+    top: calc(400px * 0.1166);
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.window-chrome {
+    background: url(images/chrome-background.png) no-repeat;
+    width: 800px;
+    height: calc(800px * 0.638);
+    top: 100px;
+    left: 100px;
+}
+
+.window__dragBlock-chrome {
+    width: calc(800px * 0.995);
+    height: calc(800px * 0.04);
+    top: calc(800px * 0.0025);
+    left: calc(800px * 0.0025);
+}
+
+.window__closeButton-chrome {
+    width: calc(800px * 0.025);
+    height: calc(800px * 0.025);
+    top: calc(800px * 0.01);
+    left: calc(800px * 0.9525);
+}
+
+.window__content-chrome {
+    width: calc(800px * 0.972);
+    height: calc(800px * 0.54375);
+    top: calc(800px * 0.08);
+    left: calc(800px * 0.014);
+    z-index: 4;
+}
+
+.tabs {
+    height: calc(800px * 0.54375);
+    overflow-y: auto;
+}
+
+.tabs__button {
+    position: absolute;
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.tabs__button-apple {
+    width: calc(800px * 0.1875);
+    height: calc(800px * 0.03);
+    top: calc(800px * (-0.0675));
+    left: calc(800px * 0.025);
+}
+
+.tabs__content {
+    height: calc(800px * 0.54375);
+}
+
+.tabs__content-hidden {
+    display: none;
+}
+
+.tabs__content-apple {
+    background: url(images/apple-background.png) no-repeat;
+}
+
+.applePopupButton {
+    position: absolute;
+    width: calc(800px * 0.43125);
+    height: calc(800px * 0.03125);
+    top: calc(800px * 0.2);
+    left: calc(800px * 0.2625);
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.appleIPerson {
+    position: absolute;
+    top: 200px;
+    left: 320px;
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.tabs__button-facebook {
+    width: calc(800px * 0.19735);
+    height: calc(800px * 0.03);
+    top: calc(800px * (-0.0675));
+    left: calc(800px * 0.225)
+}
+
+.tabs__content-facebook {
+    background: url(images/facebook-background.png) no-repeat;
+    height: calc(800px * 1.35875);
+}
+
+.facebookStatus {
+    position: relative;
+    width: calc(800px * 0.375);
+    height: calc(800px * 0.075);
+    top: calc(800px * 0.865);
+    left: calc(800px * 0.5);
+    border: none;
+    outline: none;
+    font-style: italic;
+    font-weight: 700;
+    cursor: url(images/cursor-pointer.png), auto;
+    resize: none;
+}
+
+.facebookReset {
+    position: relative;
+    width: 76px;
+    height: 34px;
+    top: 689px;
+    left: 676px;
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.tabs__button-spotify {
+    width: calc(800px * 0.1875);
+    height: calc(800px * 0.03);
+    top: calc(800px * (-0.0675));
+    left: calc(800px * 0.4312);
+}
+
+.tabs__content-spotify {
+    background: url(images/spotify-background.png) no-repeat;
+}
+
+.spotifyPopupButton {
+    position: absolute;
+    top: calc(800px * 0.32);
+    left: calc(800px * 0.1);
+    width: calc(800px * 0.38);
+    height: calc(800px * 0.09);
+    cursor: url(images/cursor-pointer.png), auto;
+}
+
+.window-apple {
+    background: url(images/applePopup-background.png) no-repeat;
+    width: 400px;
+    height: calc(400px * 0.48);
+    top: 100px;
+    left: 100px;
+}
+
+.window__dragBlock-apple {
+    width: calc(400px * 0.955);
+    height: calc(400px * 0.085);
+    top: calc(400px * 0.01);
+    left: calc(400px * 0.03);
+}
+
+.window__closeButton-apple {
+    width: calc(400px * 0.425);
+    height: calc(400px * 0.085);
+    top: calc(400px * 0.325);
+    left: calc(400px * 0.28);
+}
+
+.window-spotify {
+    background: url(images/spotifyPopup-background.png) no-repeat;
+    width: 400px;
+    height: calc(400px * 0.515);
+    top: 100px;
+    left: 100px;
+}
+
+.window__dragBlock-spotify {
+    width: calc(400px * 0.97);
+    height: calc(400px * 0.0875);
+    top: calc(400px * 0.015);
+    left: calc(400px * 0.015);
+}
+
+.window__closeButton-spotify {
+    width: calc(400px * 0.055);
+    height: calc(400px * 0.055);
+    top: calc(400px * 0.03);
+    left: calc(400px * 0.905);
+}
+
+.spotifySoundButton {
+    position: absolute;
+    width: 305px;
+    height: 55px;
+    top: 110px;
+    left: 58px;
+}
+
+.curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 0.2;
+    pointer-events: none;
+    z-index: 4000;
+}
+
+.curtain-hidden {
+    display: none;
+}
+
+.window-video {
+    background: url(images/video-background.png) no-repeat;
+    width: 800px;
+    height: calc(800px * 0.6025);
+    top: 50px;
+    left: 50px;
+    z-index: 4001 !important;
+}
+
+.window__dragBlock-video {
+    width: calc(800px * 0.9925);
+    height: calc(800px * 0.03125);
+    top: calc(800px * 0.00375);
+    left: calc(800px * 0.00375);
+}
+
+.window__closeButton-video {
+    width: calc(800px * 0.02);
+    height: calc(800px * 0.02);
+    top: calc(800px * 0.00875);
+    left: calc(800px * 0.96875);
+}
+
+.window__content-video {
+    width: calc(800px * 0.995);
+    height: calc(800px * 0.55875);
+    top: calc(800px * 0.04);
+    left: calc(800px * 0.0025);
+}
+
+.window-messenger {
+    background: url(images/messenger-background.png) no-repeat;
+    width: 300px;
+    height: calc(300px * 1.9375);
+    top: 50px;
+    left: 50px;
+}
+
+.window__dragBlock-messenger {
+    width: calc(300px * 0.9733);
+    height: calc(300px * 0.1333);
+    top: 0;
+    left: calc(300px * 0.0266);
+}
+
+.window__closeButton-messenger {
+    width: calc(300px * 0.04);
+    height: calc(300px * 0.04);
+    top: calc(300px * 0.0333);
+    left: calc(300px * 0.94);
+}
+
+.window__content-messenger {
+    width: calc(300px * 0.9466);
+    height: calc(300px * 1.1366);
+    top: calc(300px * 0.3);
+    left: calc(300px * 0.04);
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.messengerContent {
+    background: url(images/messenger-content.png) no-repeat;
+    width: 269px;
+    height: calc(269px * 1.9628);
+}
+
+.window-terminal {
+    background: url(images/terminal-background.png) no-repeat;
+    width: 400px;
+    height: 514px;
+    top: 100px;
+    left: 100px;
+}
+
+.window__content-terminal {
+    color: #00FF00;
+    width: 372px;
+    height: 460px;
+    top: 43px;
+    left: 13px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.window__dragBlock-terminal {
+    width: 390px;
+    height: 36px;
+    top: 5px;
+    left: 5px;
+}
+
+.window__closeButton-terminal {
+    width: 22px;
+    height: 22px;
+    top: 12px;
+    left: 362px;
+}
+
+.terminalText {
+    padding: 0 15px;
+}
+
+.terminalText pre {
+    margin: 10px 0;
+}
+
+.window-end1 {
+    background: url(images/end1-background.png) no-repeat;
+    width: 500px;
+    height: 226px;
+    top: 350px;
+    left: 800px;
+    z-index: 1997 !important;
+}
+
+.window__dragBlock-end1 {
+    width: 493px;
+    height: 30px;
+    left: 4px;
+    top: 4px;
+}
+
+.window__closeButton-end1 {
+    width: 125px;
+    height: 40px;
+    left: 188px;
+    top: 158px;
+}
+
+.window-end2 {
+    background: url(images/end2-background.png) no-repeat;
+    width: 200px;
+    height: 208px;
+    top: 300px;
+    left: 650px;
+    z-index: 1998 !important;
+}
+
+.window__dragBlock-end2 {
+    width: 200px;
+    height: 34px;
+    left: 0;
+    top: 0;
+}
+
+.window__closeButton-end2 {
+    width: 184px;
+    height: 162px;
+    left: 8px;
+    top: 36px;
+}
+
+.window-end3 {
+    background: url(images/end3-background.png) no-repeat;
+    width: 400px;
+    height: 334px;
+    top: 200px;
+    left: 300px;
+    z-index: 1999 !important;
+}
+
+.window__dragBlock-end3 {
+    width: 392px;
+    height: 34px;
+    left: 4px;
+    top: 4px;
+}
+
+.window__closeButton-end3 {
+    width: 330px;
+    height: 30px;
+    left: 35px;
+    top: 270px;
+}
+
+.stampCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+}

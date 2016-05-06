@@ -3,143 +3,200 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="vendor/normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="vendor/zepto.min.js"></script>
+    <script src="vendor/html2canvas.js"></script>
+    <script src="main.js"></script>
 </head>
 <body>
-<button id="toggle">Start</button>
-<div id="text"></div>
-<script>
-    var recognition = new webkitSpeechRecognition();
-    recognition.lang = "en-US";
-    recognition.interimResults = true;
+<div class="toolbar">
+    <ul class="menu">
+        <li id="menuItem-about" class="menu__item">About</li>
+        <li class="menu__item menu__item-disabled">Unplug</li>
+    </ul>
+    <div id="notification" class="notification"> Touchscreen.exe running</div>
+    <div id="clock" class="clock"></div>
+    <div class="popup popup-clock"></div>
+</div>
+<div class="notification__help notification__help-hidden">Poem</div>
+<div class="desktop">
+    <div class="desktopIcon">
+        <div id="desktopIcon-folder" class="desktopIcon__image desktopIcon__image-folder"></div>
+        <div class="desktopIcon__help desktopIcon__help-hidden">Gallery</div>
+    </div>
+    <div class="desktopIcon">
+        <div id="desktopIcon-chrome" class="desktopIcon__image desktopIcon__image-chrome"></div>
+        <div class="desktopIcon__help desktopIcon__help-hidden">www</div>
+    </div>
+    <div class="desktopIcon">
+        <div id="desktopIcon-video" class="desktopIcon__image desktopIcon__image-video"></div>
+        <div class="desktopIcon__help desktopIcon__help-hidden">Watch</div>
+    </div>
+    <div class="desktopIcon">
+        <div id="desktopIcon-help" class="desktopIcon__image desktopIcon__image-help"></div>
+    </div>
+    <div class="desktopIcon desktopIcon-save">
+        <div class="desktopIcon__help desktopIcon__help-hidden desktopIcon__help-save">Save</div>
+        <div id="desktopIcon-save" class="desktopIcon__image desktopIcon__image-save"></div>
+    </div>
+    <div class="desktopIcon desktopIcon-bin">
+        <div class="desktopIcon__help desktopIcon__help-hidden desktopIcon__help-bin">Reset</div>
+        <div id="desktopIcon-bin" class="desktopIcon__image desktopIcon__image-bin"></div>
+    </div>
+</div>
+<div class="dock">
+    <div class="dockIcon">
+        <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
+        <div class="dockIcon__image dockIcon__image-drawable dockIcon__image-pill"></div>
+        <div class="dockIcon__popup dockIcon__popup-pill"></div>
+    </div>
+    <div class="dockIcon">
+        <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
+        <div class="dockIcon__image dockIcon__image-drawable dockIcon__image-dollar"></div>
+        <div class="dockIcon__popup dockIcon__popup-dollar"></div>
+    </div>
+    <div class="dockIcon">
+        <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
+        <div class="dockIcon__image dockIcon__image-drawable dockIcon__image-emoji"></div>
+        <div class="dockIcon__popup dockIcon__popup-emoji"></div>
+    </div>
+    <div class="dockIcon">
+        <div class="dockIcon__help dockIcon__help-hidden">Click</div>
+        <div id="dockIcon-messenger" class="dockIcon__image dockIcon__image-messenger"></div>
+    </div>
+    <div class="dockIcon">
+        <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
+        <div class="dockIcon__image dockIcon__image-drawable dockIcon__image-email"></div>
+    </div>
+    <div class="dockIcon">
+        <div class="dockIcon__help dockIcon__help-hidden">Type</div>
+        <div id="dockIcon-terminal" class="dockIcon__image dockIcon__image-terminal"></div>
+    </div>
+</div>
 
-    var isRecognizing = false;
-    var phrases = [];
 
-    recognition.onspeechstart = function () {
-        phrases.push({
-            text: "",
-            timeStamp: Date.now(),
-            isFinal: false
-        });
-    };
+<div id="window-start" class="window window-movable window-closable window-hidden window-start">
+    <div class="window__dragBlock window__dragBlock-start"></div>
+    <div class="window__closeButton window__closeButton-start"></div>
+    <div class="window__content window__content-start">
+        <img class="startImage" src="images/start-background.gif"/>
+    </div>
+</div>
 
-    recognition.onresult = function (e) {
-        var phrase = e.results[0];
-        var lastIndex = phrases.length - 1;
-        phrases[lastIndex].text = phrase[0].transcript.trim();
-        phrases[lastIndex].isFinal = phrase.isFinal;
-        showPhrases(phrases);
-    };
+<div id="window-needHelp" class="window window-movable window-closable window-hidden window-needHelp">
+    <div class="window__dragBlock window__dragBlock-needHelp"></div>
+    <div class="window__closeButton window__closeButton-needHelp">&#10006;</div>
+    <div class="window__content window__content-needHelp">
+        <img width="150" src="images/needHelp.gif"/>
+    </div>
+</div>
 
-    recognition.onend = function () {
-        if (isRecognizing) {
-            recognition.start();
-        }
-    };
+<div id="window-about" class="window window-closable window-hidden window-about">
+    <div class="window__closeButton window__closeButton-about"></div>
+</div>
 
-    document.getElementById("toggle").addEventListener("click", function () {
-        if (isRecognizing) {
-            recognition.abort();
-        } else {
-            recognition.start();
-        }
-        isRecognizing = !isRecognizing;
-        document.getElementById("toggle").innerHTML = isRecognizing ? "Stop" : "Start";
-    });
+<div id="window-poem" class="window window-movable window-closable window-hidden window-poem">
+    <div class="window__dragBlock window__dragBlock-poem"></div>
+    <div class="window__closeButton window__closeButton-poem"></div>
+    <div class="window__content window__content-poem">
+        <div class="poemText"></div>
+    </div>
+</div>
 
-    function showPhrases(phrases) {
-        var text = "";
-        for (var i = phrases.length - 1; i >= 0; i--) {
-            if (phrases[i].text === "") continue;
-            var phrase = capitalize(phrases[i].text);
-            if (phrases[i].isFinal || (i !== phrases.length - 1)) {
-                phrase = addSentenceSymbol(phrase);
-            }
-            text += (new Date(phrases[i].timeStamp)).toLocaleTimeString() + ": " + phrase + "<br />";
-        }
-        document.getElementById("text").innerHTML = text;
-    }
+<div id="window-folder" class="window window-movable window-closable window-hidden window-folder">
+    <div class="window__dragBlock window__dragBlock-folder"></div>
+    <div class="window__closeButton window__closeButton-folder"></div>
+    <div id="savedImages" class="window__content window__content-folder"></div>
+</div>
 
-    function capitalize(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
+<div id="window-chrome" class="window window-movable window-closable window-hidden window-chrome">
+    <div class="window__dragBlock window__dragBlock-chrome"></div>
+    <div class="window__closeButton window__closeButton-chrome"></div>
+    <div class="window__content window__content-chrome">
+        <div class="tabs">
+            <div class="tabs__button tabs__button-apple"></div>
+            <div class="tabs__content tabs__content-apple">
+                <div id="applePopupButton" class="applePopupButton"></div>
+                <div id="appleIPerson" class="appleIPerson">
+                    <img src="images/iperson.gif" width="150"/>
+                </div>
+            </div>
+            <div class="tabs__button tabs__button-facebook"></div>
+            <div class="tabs__content tabs__content-hidden tabs__content-facebook">
+                <textarea class="facebookStatus"></textarea>
 
-    function addSentenceSymbol(sentence) {
-        var lastSymbol = sentence[sentence.length - 1];
-        if (lastSymbol === "." || lastSymbol === "!" || lastSymbol === "?") {
-            return sentence;
-        }
-        if (isQuestionSentence(sentence)) {
-            return sentence + "?";
-        } else {
-            return sentence + ".";
-        }
-    }
+                <div id="facebookReset" class="facebookReset"></div>
+            </div>
+            <div class="tabs__button tabs__button-spotify"></div>
+            <div class="tabs__content tabs__content-hidden tabs__content-spotify">
+                <div id="spotifyPopupButton" class="spotifyPopupButton"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    function isQuestionSentence(sentence) {
-        var affixes = ["Could",
-            "Couldn’t",
-            "Shall",
-            "Should",
-            "Shouldn’t",
-            "Would",
-            "Wouldn’t",
-            "Will",
-            "Won’t",
-            "Do",
-            "Did",
-            "Didn’t",
-            "Does",
-            "Doesn’t",
-            "Am",
-            "Is",
-            "Isn’t",
-            "Are",
-            "Aren’t",
-            "Can",
-            "Can’t",
-            "Was",
-            "Wasn’t",
-            "Were",
-            "Weren’t",
-            "Has",
-            "Hasn’t",
-            "Have",
-            "Haven’t",
-            "Had",
-            "Hadn’t",
-            "Who",
-            "What",
-            "When",
-            "Where",
-            "How",
-            "Why",
-            "Which",
-            "Might"];
+<div id="window-apple" class="window window-movable window-closable window-hidden window-drawable window-apple">
+    <div class="window__dragBlock window__dragBlock-apple"></div>
+    <div class="window__closeButton window__closeButton-apple"></div>
+</div>
 
-        var blankAffixes = ["Or", "And"];
+<div id="window-spotify" class="window window-movable window-closable window-hidden window-drawable window-spotify">
+    <div class="window__dragBlock window__dragBlock-spotify"></div>
+    <div class="window__closeButton window__closeButton-spotify"></div>
+    <div id="spotifySoundButton" class="spotifySoundButton"></div>
+</div>
 
-        var words = sentence.split(/\s+/);
-        var word0 = words.length > 0 ? words[0].trim().toUpperCase() : "";
-        var word1 = words.length > 1 ? words[1].trim().toUpperCase() : "";
+<div id="curtain" class="curtain curtain-hidden"></div>
 
-        for (var i = 0; i < affixes.length; i++) {
-            var affix = affixes[i].toUpperCase();
-            if (word0 === affix) {
-                return true;
-            }
-            if (word1 === affix) {
-                for (var j = 0; j < blankAffixes.length; j++) {
-                    var blankAffix = blankAffixes[j].toUpperCase();
-                    if (word0 === blankAffix) {
-                        return true;
-                    }
-                }
-            }
-        }
+<div id="window-video" class="window window-movable window-closable window-hidden window-video">
+    <div class="window__dragBlock window__dragBlock-video"></div>
+    <div class="window__closeButton window__closeButton-video"></div>
+    <div class="window__content window__content-video">
+        <video width="796" loop>
+            <source src="data/movie.mp4" type="video/mp4"/>
+        </video>
+    </div>
+</div>
 
-        return false;
-    }
-</script>
+<div id="window-messenger"
+     class="window window-movable window-closable window-hidden window-messenger">
+    <div class="window__dragBlock window__dragBlock-messenger"></div>
+    <div class="window__closeButton window__closeButton-messenger"></div>
+    <div class="window__content window__content-messenger">
+        <div class="messengerContent">
+        </div>
+    </div>
+</div>
+
+<div id="window-terminal"
+     class="window window-movable window-closable window-hidden window-terminal">
+    <div class="window__dragBlock window__dragBlock-terminal"></div>
+    <div class="window__closeButton window__closeButton-terminal"></div>
+    <div id="window__content-terminal" class="window__content window__content-terminal">
+        <div class="terminalText">
+            <pre></pre>
+            <pre></pre>
+            <pre></pre>
+            <pre></pre>
+        </div>
+    </div>
+</div>
+
+<div id="window-end1" class="window window-movable window-closable window-hidden window-drawable window-end1">
+    <div class="window__dragBlock window__dragBlock-end1"></div>
+    <div class="window__closeButton window__closeButton-end1"></div>
+</div>
+
+<div id="window-end2" class="window window-movable window-closable window-hidden window-drawable window-end2">
+    <div class="window__dragBlock window__dragBlock-end2"></div>
+    <div class="window__closeButton window__closeButton-end2"></div>
+</div>
+
+<div id="window-end3" class="window window-movable window-closable window-hidden window-drawable window-end3">
+    <div class="window__dragBlock window__dragBlock-end3"></div>
+    <div class="window__closeButton window__closeButton-end3"></div>
+</div>
+
 </body>
 </html>
