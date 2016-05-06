@@ -4,199 +4,109 @@
     <meta charset="UTF-8">
     <title></title>
     <link rel="stylesheet" href="vendor/normalize.css">
-    <link rel="stylesheet" href="main.css">
-    <script src="vendor/zepto.min.js"></script>
-    <script src="vendor/html2canvas.js"></script>
-    <script src="main.js"></script>
+    <link rel="stylesheet" href="intro.css">
 </head>
 <body>
-<div class="toolbar">
-    <ul class="menu">
-        <li id="menuItem-about" class="menu__item">About</li>
-        <li class="menu__item menu__item-disabled">Unplug</li>
-    </ul>
-    <div id="notification" class="notification"> Touchscreen.exe running</div>
-    <div id="clock" class="clock"></div>
-    <div class="popup popup-clock"></div>
-</div>
-<div class="notification__help notification__help-hidden">Poem</div>
-<div class="desktop">
-    <div class="desktopIcon">
-        <div id="desktopIcon-folder" class="desktopIcon__image desktopIcon__image-folder"></div>
-        <div class="desktopIcon__help desktopIcon__help-hidden">Gallery</div>
-    </div>
-    <div class="desktopIcon">
-        <div id="desktopIcon-chrome" class="desktopIcon__image desktopIcon__image-chrome"></div>
-        <div class="desktopIcon__help desktopIcon__help-hidden">www</div>
-    </div>
-    <div class="desktopIcon">
-        <div id="desktopIcon-video" class="desktopIcon__image desktopIcon__image-video"></div>
-        <div class="desktopIcon__help desktopIcon__help-hidden">Watch</div>
-    </div>
-    <div class="desktopIcon">
-        <div id="desktopIcon-help" class="desktopIcon__image desktopIcon__image-help"></div>
-    </div>
-    <div class="desktopIcon desktopIcon-save">
-        <div class="desktopIcon__help desktopIcon__help-hidden desktopIcon__help-save">Save</div>
-        <div id="desktopIcon-save" class="desktopIcon__image desktopIcon__image-save"></div>
-    </div>
-    <div class="desktopIcon desktopIcon-bin">
-        <div class="desktopIcon__help desktopIcon__help-hidden desktopIcon__help-bin">Reset</div>
-        <div id="desktopIcon-bin" class="desktopIcon__image desktopIcon__image-bin"></div>
-    </div>
-</div>
-<div class="dock">
-    <div class="dockIcon">
-        <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
-        <div class="dockIcon__image dockIcon__image-drawable dockIcon__image-pill"></div>
-        <div class="dockIcon__popup dockIcon__popup-pill"></div>
-    </div>
-    <div class="dockIcon">
-        <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
-        <div class="dockIcon__image dockIcon__image-drawable dockIcon__image-dollar"></div>
-        <div class="dockIcon__popup dockIcon__popup-dollar"></div>
-    </div>
-    <div class="dockIcon">
-        <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
-        <div class="dockIcon__image dockIcon__image-drawable dockIcon__image-emoji"></div>
-        <div class="dockIcon__popup dockIcon__popup-emoji"></div>
-    </div>
-    <div class="dockIcon">
-        <div class="dockIcon__help dockIcon__help-hidden">Click</div>
-        <div id="dockIcon-messenger" class="dockIcon__image dockIcon__image-messenger"></div>
-    </div>
-    <div class="dockIcon">
-        <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
-        <div class="dockIcon__image dockIcon__image-drawable dockIcon__image-email"></div>
-    </div>
-    <div class="dockIcon">
-        <div class="dockIcon__help dockIcon__help-hidden">Type</div>
-        <div id="dockIcon-terminal" class="dockIcon__image dockIcon__image-terminal"></div>
-    </div>
-</div>
+<div class="container">
 
+    <div>
+        <div><img width="300" src="images/logo.png"/></div>
 
-<div id="window-start" class="window window-movable window-closable window-hidden window-start">
-    <div class="window__dragBlock window__dragBlock-start"></div>
-    <div class="window__closeButton window__closeButton-start"></div>
-    <div class="window__content window__content-start">
-        <img class="startImage" src="images/start-background.gif"/>
+        <p style="font-size: 16px; margin-top: 0px;">EVERY CULTURAL ELITIST AND TUMBLR TEEN KNOWS WHAT I’M TALKING
+            ABOUT.</p>
     </div>
-</div>
 
-<div id="window-needHelp" class="window window-movable window-closable window-hidden window-needHelp">
-    <div class="window__dragBlock window__dragBlock-needHelp"></div>
-    <div class="window__closeButton window__closeButton-needHelp">&#10006;</div>
-    <div class="window__content window__content-needHelp">
-        <img width="150" src="images/needHelp.gif"/>
+    <div class="clearfix" style="margin-top: 80px;">
+        <div class="left" style="width: 640px;">
+            <span>POETRY IS A BEAUTIFUL LITERARY ART FORM, WHICH IS EITHER <span
+                    class="strong">READ AS TEXT</span> OR <span class="strong">WATCHED AS A PERFORMANCE</span>.</p>
+
+                <p>MARSHALL JONES’ SATIRICAL SLAM POEM ‘TOUCHSCREEN’ IS ONE SUCH ‘PERFORMED’ POEM ABOUT OUR DIGITAL
+                    IMMERSION.</p>
+
+            <p>WHICHEVER FORM IT TAKES, THERE’S ALWAYS AN AIR OF</p>
+
+            <p class="special">‘PLEASE STAND BEHIND THE YELLOW LINE’</p>
+
+            <p>WHEN IT COMES TO POETRY.</p>
+
+            <p>THERE IS A DISTANCE OF SEPARATION BETWEEN THE ART AND THE AUDIENCE.</p>
+        </div>
+        <div class="right">
+            <img width="300" src="images/poet.gif"/>
+        </div>
     </div>
-</div>
 
-<div id="window-about" class="window window-closable window-hidden window-about">
-    <div class="window__closeButton window__closeButton-about"></div>
-</div>
+    <div style="margin-top: 60px;">
+        <h2>BUT SOME RULES ARE MEANT TO BE BROKEN</h2>
 
-<div id="window-poem" class="window window-movable window-closable window-hidden window-poem">
-    <div class="window__dragBlock window__dragBlock-poem"></div>
-    <div class="window__closeButton window__closeButton-poem"></div>
-    <div class="window__content window__content-poem">
-        <div class="poemText"></div>
+        <div style="margin-top: 50px; margin-left:250px">
+            <img width="500" src="images/breakRules.png"/>
+        </div>
     </div>
-</div>
 
-<div id="window-folder" class="window window-movable window-closable window-hidden window-folder">
-    <div class="window__dragBlock window__dragBlock-folder"></div>
-    <div class="window__closeButton window__closeButton-folder"></div>
-    <div id="savedImages" class="window__content window__content-folder"></div>
-</div>
+    <div class="clearfix" style="margin-top: 100px;">
+        <div class="left" style="width: 250px;">
+            <img width=280" src="images/metamorphose.gif"/>
+        </div>
+        <div class="right" style="width: 660px; line-height: 32px;">
+            <p>IN THE SPIRIT OF BREAKING THE RULES OF ART PERCEPTION,<br/>
+                I DREW INSPIRATION FROM 20TH CENTURY ARTIST AND<br/>
+                ALL-ROUND REBEL <span style="font-size:25px; font-weight:700;">MARCEL DUCHAMP</span>; THE MAN WHO<br/>
+                CHALLENGED THE BOUNDARIES OF WHAT WAS ACCEPTED AS ART<br/>
+                BY CREATING ‘READYMADES’ OR ‘ANTI-ART’ ARTWORK CREATED<br/>
+                BY REPURPOSING EVERYDAY OBJECTS. HIS RATIONALE WAS THAT<br/>
+                <span style="font-weight: 700; text-decoration: underline;">THE ‘ART’ LIES IN DECONSTRUCTING THE MEANING OF A WORK<br/>
+                AND THE AESTHETIC IS SIMPLY A BYPRODUCT.</span></p>
+        </div>
+    </div>
 
-<div id="window-chrome" class="window window-movable window-closable window-hidden window-chrome">
-    <div class="window__dragBlock window__dragBlock-chrome"></div>
-    <div class="window__closeButton window__closeButton-chrome"></div>
-    <div class="window__content window__content-chrome">
-        <div class="tabs">
-            <div class="tabs__button tabs__button-apple"></div>
-            <div class="tabs__content tabs__content-apple">
-                <div id="applePopupButton" class="applePopupButton"></div>
-                <div id="appleIPerson" class="appleIPerson">
-                    <img src="images/iperson.gif" width="150"/>
-                </div>
+    <div class="clearfix" style="margin-top: 100px;">
+        <div class="left" style="width: 530px;">
+            <p>THE RESULT OF THIS EXPLORATION IS A <span style="text-decoration: underline">WEB TOY:</span></p>
+
+            <p style="font-weight: 700; margin-top: 60px;"><span style="text-decoration: underline">A DIGITAL SANDBOX OF CHOPPED UP POEM BITS</span><br/>
+                SCATTERED AROUND A VIRTUAL DESKTOP.</p>
+
+            <p style="margin-top: 70px;">THIS ALLOWS YOU TO HOP AROUND FROM<br/>
+                STANZA TO STANZA, COLLAGING THE POEM<br/>
+                TOGETHER IN ANY ORDER YOU WISH.</p>
+
+            <p style="margin-top: 90px;">DECONSTRUCT THE DESKTOP.<br/>
+                RECONSTRUCT THE POEM.<br/>
+                <span style="text-decoration: underline">CREATE YOUR VERY OWN DIGITAL READYMADES</span></p>
+
+            <p style="margin-top:140px;"><span style="font-size: 37px; font-weight: 700;">TO CREATE IS TO DESTROY</span><br/>
+                <span style="text-align: right; display:block; font-size:15px;">- KERI SMITH</span></p>
+
+            <p style="margin-top:90px;">IMMERSE YOURSELF IN THE DIGITAL WORLD<br/>
+                OF A POEM ABOUT THE DIGITAL WORLD.</p>
+        </div>
+        <div class="right">
+            <div>
+                <img style="border: 2px solid black" width="350" src="images/open.gif"/>
+
+                <div style="text-align: center; margin-top:10px;">OPEN UP SOME WINDOWS</div>
             </div>
-            <div class="tabs__button tabs__button-facebook"></div>
-            <div class="tabs__content tabs__content-hidden tabs__content-facebook">
-                <textarea class="facebookStatus"></textarea>
+            <div style="margin-top:40px">
+                <img style="border: 2px solid black" width="350" src="images/drag.gif"/>
 
-                <div id="facebookReset" class="facebookReset"></div>
+                <div style="text-align: center; margin-top:10px;">DRAG AROUND SOME ICONS</div>
             </div>
-            <div class="tabs__button tabs__button-spotify"></div>
-            <div class="tabs__content tabs__content-hidden tabs__content-spotify">
-                <div id="spotifyPopupButton" class="spotifyPopupButton"></div>
+
+            <div style="margin-top:40px">
+                <img style="border: 2px solid black" width="350" src="images/type.gif"/>
+
+                <div style="text-align: center; margin-top:10px;">HECK, EVEN TYPE IN IT</div>
             </div>
         </div>
     </div>
-</div>
-
-<div id="window-apple" class="window window-movable window-closable window-hidden window-drawable window-apple">
-    <div class="window__dragBlock window__dragBlock-apple"></div>
-    <div class="window__closeButton window__closeButton-apple"></div>
-</div>
-
-<div id="window-spotify" class="window window-movable window-closable window-hidden window-drawable window-spotify">
-    <div class="window__dragBlock window__dragBlock-spotify"></div>
-    <div class="window__closeButton window__closeButton-spotify"></div>
-    <div id="spotifySoundButton" class="spotifySoundButton"></div>
-</div>
-
-<div id="curtain" class="curtain curtain-hidden"></div>
-
-<div id="window-video" class="window window-movable window-closable window-hidden window-video">
-    <div class="window__dragBlock window__dragBlock-video"></div>
-    <div class="window__closeButton window__closeButton-video"></div>
-    <div class="window__content window__content-video">
-        <video width="796" loop>
-            <source src="data/movie.mp4" type="video/mp4"/>
-        </video>
+    <div style="margin-top: 60px;">
+        <h2>WHAT ARE YOU WAITING FOR? </h2>
+        <a href="webToy.html" class="button-webToy"></a>
+        <a href="webToy.html" class="button-inUse"></a>
+        <a href="webToy.html" class="button-animation"></a>
     </div>
 </div>
-
-<div id="window-messenger"
-     class="window window-movable window-closable window-hidden window-messenger">
-    <div class="window__dragBlock window__dragBlock-messenger"></div>
-    <div class="window__closeButton window__closeButton-messenger"></div>
-    <div class="window__content window__content-messenger">
-        <div class="messengerContent">
-        </div>
-    </div>
-</div>
-
-<div id="window-terminal"
-     class="window window-movable window-closable window-hidden window-terminal">
-    <div class="window__dragBlock window__dragBlock-terminal"></div>
-    <div class="window__closeButton window__closeButton-terminal"></div>
-    <div id="window__content-terminal" class="window__content window__content-terminal">
-        <div class="terminalText">
-            <pre></pre>
-            <pre></pre>
-            <pre></pre>
-            <pre></pre>
-        </div>
-    </div>
-</div>
-
-<div id="window-end1" class="window window-movable window-closable window-hidden window-drawable window-end1">
-    <div class="window__dragBlock window__dragBlock-end1"></div>
-    <div class="window__closeButton window__closeButton-end1"></div>
-</div>
-
-<div id="window-end2" class="window window-movable window-closable window-hidden window-drawable window-end2">
-    <div class="window__dragBlock window__dragBlock-end2"></div>
-    <div class="window__closeButton window__closeButton-end2"></div>
-</div>
-
-<div id="window-end3" class="window window-movable window-closable window-hidden window-drawable window-end3">
-    <div class="window__dragBlock window__dragBlock-end3"></div>
-    <div class="window__closeButton window__closeButton-end3"></div>
-</div>
-
 </body>
 </html>
