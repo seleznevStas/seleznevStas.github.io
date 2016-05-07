@@ -104,6 +104,7 @@ function init() {
     $("#spotifyPopupButton").on("click", spotifyPopupButton_click);
     $("#spotifySoundButton").on("click", spotifySoundButton_click);
     $("#window-video").on("window:open", videoWindow_open).on("window:close", videoWindow_close);
+    $("#window-video video").on("ended", video_ended);
     $(document).on("keypress", terminal_keypress);
 
     $("#window-end1, #window-end2, #window-end3").on("window:close", endWindow_close);
@@ -137,6 +138,10 @@ function bin_click() {
         }
     });
 
+    var $chromeTabsButtons = $("#window-chrome .tabs__button");
+    $chromeTabsButtons.removeClass("tabs__button-active");
+    $($chromeTabsButtons[0]).addClass("tabs__button-active");
+
     var $chromeTabs = $("#window-chrome .tabs__content");
     $chromeTabs.addClass("tabs__content-hidden");
     $($chromeTabs[0]).removeClass("tabs__content-hidden");
@@ -149,7 +154,7 @@ function bin_click() {
     $("#window__content-terminal pre").text("");
     terminalSettings.currentIndex = 0;
     terminalSettings.currentParagraph = 0;
-    var terminal = $("#terminalText")[0];
+    var terminal = $(".terminalText")[0];
     terminal.scrollTop = 0;
 }
 
@@ -163,7 +168,7 @@ function save_click() {
             var ctx = filledCanvas.getContext("2d");
             ctx.fillStyle = "white";
             ctx.fillRect(0, 0, filledCanvas.width, filledCanvas.height);
-            ctx.drawImage(canvas, 0 ,0);
+            ctx.drawImage(canvas, 0, 0);
 
             var savedImages = localStorage.getItem("savedImages");
             savedImages = savedImages ? JSON.parse(savedImages) : [];
@@ -221,7 +226,9 @@ function dockIcon_mousedown(e) {
         offsetY: 30,
         width: 60,
         height: 60,
-        context: ctx
+        context: ctx,
+        pageX: e.pageX,
+        pageY: e.pageY
     };
 
     var value = $(e.target).css("background-image");
@@ -301,6 +308,7 @@ function windowCloseButton_click() {
 function windowStart_checkForStart() {
     if (isStart) {
         openWindow("window-video");
+        clockInterval = setInterval(updateClock, 1000);
     }
 }
 
@@ -340,7 +348,8 @@ function drawableWindow_activated(e, x, y) {
         offsetY: y,
         width: $window.width(),
         height: $window.height(),
-        context: ctx
+        context: ctx,
+        enabled: true
     };
 
     stampCanvases = $(".stampCanvas");
@@ -391,6 +400,8 @@ function terminalWindow_deactivated() {
 function tabsButton_click() {
     var $this = $(this);
     var tabs = $this.closest(".tabs");
+    tabs.find(".tabs__button").removeClass("tabs__button-active");
+    $this.addClass("tabs__button-active");
     tabs.find(".tabs__content").addClass("tabs__content-hidden");
     $this.next(".tabs__content").removeClass("tabs__content-hidden");
 }
@@ -452,12 +463,25 @@ function spotifySoundButton_click() {
 
 function videoWindow_open() {
     $(this).find("video")[0].play();
-    $("#curtain").removeClass("curtain-hidden");
+    $("#curtain").css("opacity", 0).removeClass("curtain-hidden").animate({opacity: 0.75}, {
+        duration: 800
+    });
 }
 
 function videoWindow_close() {
     $(this).find("video")[0].pause();
-    $("#curtain").addClass("curtain-hidden");
+    $("#curtain").animate({opacity: 0}, {
+        duration: 800,
+        complete: function () {
+            $("#curtain").addClass("curtain-hidden");
+        }
+    });
+}
+
+function video_ended() {
+    var $videoWindow = $("#window-video");
+    $videoWindow.addClass("window-hidden");
+    $videoWindow.trigger("window:close");
 }
 
 function terminal_keypress() {
@@ -511,11 +535,16 @@ function endWindow_close() {
         }
     });
 
+    var $chromeTabsButtons = $("#window-chrome .tabs__button");
+    $chromeTabsButtons.removeClass("tabs__button-active");
+    $($chromeTabsButtons[0]).addClass("tabs__button-active");
+
     var $chromeTabs = $("#window-chrome .tabs__content");
     $chromeTabs.addClass("tabs__content-hidden");
     $($chromeTabs[0]).removeClass("tabs__content-hidden");
 
     $(".facebookStatus").val("");
+    $(".messengerMessage").val("");
 
     $(".window__content-poem")[0].scrollTop = 0;
     $(".window__content-messenger")[0].scrollTop = 0;
@@ -523,13 +552,21 @@ function endWindow_close() {
     $("#window__content-terminal pre").text("");
     terminalSettings.currentIndex = 0;
     terminalSettings.currentParagraph = 0;
-    var terminal = $("#terminalText")[0];
+    var terminal = $(".terminalText")[0];
     terminal.scrollTop = 0;
 }
 
 function draw() {
     if (!isDrawing) return;
     deselect();
+    if (!drawSettings.enabled) {
+        var d = Math.abs(drawSettings.pageX - mouseX) + Math.abs(drawSettings.pageY - mouseY);
+        if (d < 5) {
+            return;
+        }
+        drawSettings.enabled = true;
+    }
+
     drawSettings.context.drawImage(drawSettings.image, mouseX - drawSettings.offsetX, mouseY - drawSettings.offsetY, drawSettings.width, drawSettings.height);
 }
 
@@ -548,10 +585,7 @@ function updateClock() {
         openWindow("window-end2");
         openWindow("window-end3");
     }
-
 }
-
-clockInterval = setInterval(updateClock, 1000);
 
 function deselect() {
     if (document.selection) {

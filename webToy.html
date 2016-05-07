@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="vendor/normalize.css">
     <link rel="stylesheet" href="main.css">
     <script src="vendor/zepto.min.js"></script>
+    <script src="vendor/zepto-animate.js"></script>
     <script src="vendor/html2canvas.js"></script>
     <script src="main.js"></script>
 </head>
@@ -63,7 +64,7 @@
     </div>
     <div class="dockIcon">
         <div class="dockIcon__help dockIcon__help-hidden">Click</div>
-        <div id="dockIcon-messenger" class="dockIcon__image dockIcon__image-messenger"></div>
+        <div id="dockIcon-messenger" class="dockIcon__image dockIcon__image-drawable dockIcon__image-messenger"></div>
     </div>
     <div class="dockIcon">
         <div class="dockIcon__help dockIcon__help-hidden">Drag</div>
@@ -71,7 +72,7 @@
     </div>
     <div class="dockIcon">
         <div class="dockIcon__help dockIcon__help-hidden">Type</div>
-        <div id="dockIcon-terminal" class="dockIcon__image dockIcon__image-terminal"></div>
+        <div id="dockIcon-terminal" class="dockIcon__image dockIcon__image-drawable dockIcon__image-terminal"></div>
     </div>
 </div>
 
@@ -105,7 +106,7 @@
 </div>
 
 <div id="window-folder" class="window window-movable window-closable window-hidden window-folder">
-    <div class="window__dragBlock window__dragBlock-folder"></div>
+    <div class="window__dragBlock window__dragBlock-folder">Gallery</div>
     <div class="window__closeButton window__closeButton-folder"></div>
     <div id="savedImages" class="window__content window__content-folder"></div>
 </div>
@@ -115,20 +116,20 @@
     <div class="window__closeButton window__closeButton-chrome"></div>
     <div class="window__content window__content-chrome">
         <div class="tabs">
-            <div class="tabs__button tabs__button-apple"></div>
+            <div class="tabs__button tabs__button-active tabs__button-apple">Apple</div>
             <div class="tabs__content tabs__content-apple">
                 <div id="applePopupButton" class="applePopupButton"></div>
                 <div id="appleIPerson" class="appleIPerson">
                     <img src="images/iperson.gif" width="150"/>
                 </div>
             </div>
-            <div class="tabs__button tabs__button-facebook"></div>
+            <div class="tabs__button tabs__button-facebook">Facebook</div>
             <div class="tabs__content tabs__content-hidden tabs__content-facebook">
                 <textarea class="facebookStatus"></textarea>
 
                 <div id="facebookReset" class="facebookReset"></div>
             </div>
-            <div class="tabs__button tabs__button-spotify"></div>
+            <div class="tabs__button tabs__button-spotify">Spotify</div>
             <div class="tabs__content tabs__content-hidden tabs__content-spotify">
                 <div id="spotifyPopupButton" class="spotifyPopupButton"></div>
             </div>
@@ -153,7 +154,7 @@
     <div class="window__dragBlock window__dragBlock-video"></div>
     <div class="window__closeButton window__closeButton-video"></div>
     <div class="window__content window__content-video">
-        <video width="796" loop>
+        <video width="796">
             <source src="data/movie.mp4" type="video/mp4"/>
         </video>
     </div>
@@ -167,11 +168,12 @@
         <div class="messengerContent">
         </div>
     </div>
+    <textarea class="messengerMessage"></textarea>
 </div>
 
 <div id="window-terminal"
      class="window window-movable window-closable window-hidden window-terminal">
-    <div class="window__dragBlock window__dragBlock-terminal"></div>
+    <div class="window__dragBlock window__dragBlock-terminal">Terminal</div>
     <div class="window__closeButton window__closeButton-terminal"></div>
     <div id="window__content-terminal" class="window__content window__content-terminal">
         <div class="terminalText">
