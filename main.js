@@ -193,6 +193,9 @@ function video_click() {
 }
 
 function help_click() {
+    if ($(".notification__help").hasClass("notification__help-hidden")) {
+        openWindow("window-needHelp");
+    }
     $(".notification__help").toggleClass("notification__help-hidden");
     $(".desktopIcon__help").toggleClass("desktopIcon__help-hidden");
     $(".dockIcon__help").toggleClass("dockIcon__help-hidden");
