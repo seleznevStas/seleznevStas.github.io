@@ -838,7 +838,6 @@ audioOutputSelect.onchange = function() {
             var tmp = timeStop-timeStart; tmp /= 1000; var tsec = tmp;
 
             document.getElementById("curtext").innerHTML = phrase[0].transcript.trim();
-            console.warn("onresult", e);
 
             if(phrase.isFinal === true){
                 if(debug_on == "on")
@@ -868,7 +867,6 @@ audioOutputSelect.onchange = function() {
                 showPhrases(phrases);
                 document.getElementById("curtext").innerHTML = "";
             }
-
         };
 
 
