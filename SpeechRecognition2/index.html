@@ -1,5 +1,3 @@
-
-
 <html class="no-js consumer" lang="en">
   <head>
     <title>SIP.js Demo Phone with voice recognition</title>
@@ -840,6 +838,7 @@ audioOutputSelect.onchange = function() {
             var tmp = timeStop-timeStart; tmp /= 1000; var tsec = tmp;
 
             document.getElementById("curtext").innerHTML = phrase[0].transcript.trim();
+            console.warn("onresult", phrase);
 
             if(phrase.isFinal === true){
                 if(debug_on == "on")
