@@ -834,7 +834,7 @@ audioOutputSelect.onchange = function() {
 
         recognition.onresult = function (e) {
             var timeStop = new Date().getTime();
-            var phrase = e.results[0];
+            var phrase = e.results[e.resultIndex];
             var tmp = timeStop-timeStart; tmp /= 1000; var tsec = tmp;
 
             document.getElementById("curtext").innerHTML = phrase[0].transcript.trim();
