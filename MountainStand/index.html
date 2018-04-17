@@ -1,0 +1,78 @@
+<html>
+
+<head>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+
+		stand__container {
+			min-height: 100%;
+			position: relative;
+		}
+
+		.stand__display {
+			position: relative;
+			margin: 0 auto;
+			background-image: url(stand.png);
+			background-repeat: no-repeat;
+			background-size: contain;
+		}
+
+		.stand__point {
+			position: absolute;
+			border-radius: 50%;
+			cursor: pointer;
+		}
+
+		.stand__point-active {
+			background-color: blue;
+			opacity: 0.2;
+		}
+
+		.popup {
+			position: absolute;
+			top: 0;
+			left: 0;
+			max-width: 350px;
+			background-color: white;
+			opacity: 0.75;
+			border-radius: 10px;
+			padding: 6px;
+			font-size: 16px;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			cursor: pointer;
+		}
+
+		.popup p {
+			margin: 0;
+			text-align: justify;
+		}
+
+		.popup p+p {
+			margin-top: 0.75em;
+		}
+
+		.popup ul {
+			margin: 0.25em 0 0;
+			padding-left: 1.5em;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="stand">
+		<div id="standContainer" class="stand__container">
+			<div id="standDisplay" class="stand__display">
+			</div>
+		</div>
+	</div>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="app.js"></script>
+</body>
+
+</html>
